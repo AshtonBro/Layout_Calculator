@@ -27,5 +27,7 @@ endButton.addEventListener('click', () => {
             hideElem(elem);
         }
     }
+
+    showElem(total);
 });
 

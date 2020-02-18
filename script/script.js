@@ -6,6 +6,7 @@ const startButton = document.querySelector('.start-button'),
     formCalculate = document.querySelector('.form-calculate'),
     endButton = document.querySelector('.end-button'),
     total = document.querySelector('.total'),
+    fastRange = document.querySelector('.fast-range'),
     subTotal = document.querySelector('.subtotal');
 
 
@@ -17,9 +18,13 @@ const hideElem = (elem) => {
     elem.style.display = 'none';
 };
 
-const handlerCallBackForm = () => {
-    let target = event.target;
-    console.log('target: ', target);
+const handlerCallBackForm = (event) => {
+    const target = event.target;
+    
+    if (target.classList.contains('want-faster')){
+       
+        target.checked ? showElem(fastRange) : hideElem(fastRange);
+    }
 };
 
 startButton.addEventListener('click', () => {

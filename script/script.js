@@ -5,7 +5,8 @@ const startButton = document.querySelector('.start-button'),
     mainForm = document.querySelector('.main-form'),
     formCalculate = document.querySelector('.form-calculate'),
     endButton = document.querySelector('.end-button'),
-    total = document.querySelector('.total');
+    total = document.querySelector('.total'),
+    subTotal = document.querySelector('.subtotal');
 
 
 const showElem = (elem) => {
@@ -17,7 +18,8 @@ const hideElem = (elem) => {
 };
 
 const handlerCallBackForm = () => {
-    
+    let target = event.target;
+    console.log('target: ', target);
 };
 
 startButton.addEventListener('click', () => {

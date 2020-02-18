@@ -16,6 +16,10 @@ const hideElem = (elem) => {
     elem.style.display = 'none';
 };
 
+const handlerCallBackForm = () => {
+    
+};
+
 startButton.addEventListener('click', () => {
  showElem(mainForm);
  hideElem(firstScreen);
@@ -31,3 +35,5 @@ endButton.addEventListener('click', () => {
     showElem(total);
 });
 
+
+formCalculate.addEventListener('change', handlerCallBackForm);

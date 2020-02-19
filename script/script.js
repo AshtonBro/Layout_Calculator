@@ -65,7 +65,13 @@ const priceCulc = (elem) => {
             } else {
                 result += DATA.price[index] * DATA[key] / 100;
             }
-        }
+        } else {
+            if (key === 'desktopTemplates') {
+                result += DATA.price[index] * DATA[key][index] / 100;
+            } else {
+                result += DATA[key][index];
+            }
+        } 
     });
 
     result += DATA.price[index];

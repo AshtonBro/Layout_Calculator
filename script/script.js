@@ -9,7 +9,8 @@ const startButton = document.querySelector('.start-button'),
     fastRange = document.querySelector('.fast-range'),
     subTotal = document.querySelector('.subtotal'),
     totalPriceSum = document.querySelector('.total_price__sum');
-
+    
+    
 const DATA = {
     whichSite: ["landing", "multiPage", "onlineStore"],
     price: [4000, 8000, 26000],
@@ -57,9 +58,10 @@ const priceCulc = (elem) => {
             options.push(item.value);
         }
         if (item.value === 'adapt' && item.checked){
-            console.log(item);
+            inputs[4].removeAttribute("disabled");
         }
-    }
+        console.log(item);
+    } 
 
     options.forEach((key) => {
         if (typeof(DATA[key]) === 'number') {

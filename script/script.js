@@ -56,6 +56,9 @@ const priceCulc = (elem) => {
         } else if (item.classList.contains('calc-handler') && item.checked) {
             options.push(item.value);
         }
+        if (item.value === 'adapt' && item.checked){
+            console.log(item);
+        }
     }
 
     options.forEach((key) => {

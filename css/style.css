@@ -514,10 +514,6 @@ label.label-radio {
           user-select: none;
 }
 
-.switcher input {
-  display: none;
-}
-
 .switcher__indicator::after {
   content: '';
   position: absolute;

@@ -8,9 +8,9 @@ const startButton = document.querySelector('.start-button'),
     total = document.querySelector('.total'),
     fastRange = document.querySelector('.fast-range'),
     subTotal = document.querySelector('.subtotal'),
-    totalPriceSum = document.querySelector('.total_price__sum');
-    
-    
+    totalPriceSum = document.querySelector('.total_price__sum'),
+    inputs = document.querySelectorAll('.calc-handler');
+
 const DATA = {
     whichSite: ["landing", "multiPage", "onlineStore"],
     price: [4000, 8000, 26000],
@@ -58,9 +58,11 @@ const priceCulc = (elem) => {
             options.push(item.value);
         }
         if (item.value === 'adapt' && item.checked){
-            inputs[4].removeAttribute("disabled");
+            inputs[5].removeAttribute("disabled");
+        } else if (item.value === 'adapt' && !item.checked) {
+            inputs[5].disabled = 'false';
         }
-        console.log(item);
+       
     } 
 
     options.forEach((key) => {

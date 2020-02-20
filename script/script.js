@@ -17,6 +17,7 @@ const startButton = document.querySelector('.start-button'),
 
 const DATA = {
     DAY_STRING: ['день', 'дня', 'дней'],
+    yesString: ['Да', 'Нет'],
     whichSite: ["landing", "multiPage", "onlineStore"],
     price: [4000, 8000, 26000],
     desktopTemplates: [50, 40, 30],
@@ -108,7 +109,7 @@ const priceCulc = (elem) => {
 
     result += DATA.price[index];
 
-    renderTextConten(result, txtSite, maxDeadlineDay, minDeadlineDay);
+    renderTextConten(result, txtSite, maxDeadlineDay, minDeadlineDay, );
 
 };
 const handlerCallBackForm = (event) => {

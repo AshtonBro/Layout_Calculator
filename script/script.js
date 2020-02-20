@@ -13,7 +13,8 @@ const startButton = document.querySelector('.start-button'),
     typeSite = document.querySelector('.type-site'),
     maxDedline = document.querySelector('.max-deadline'),
     rangeDeadline = document.querySelector('.range-deadline'),
-    deadLineValue = document.querySelector('.deadline-value');
+    deadLineValue = document.querySelector('.deadline-value'),
+    checkboxLabel = document.querySelectorAll('.checkbox-label');
 
 const DATA = {
     DAY_STRING: ['день', 'дня', 'дней'],
@@ -55,6 +56,11 @@ const renderTextConten = (total, txtSite, maxDay, minDay) => {
     rangeDeadline.min = minDay;
     rangeDeadline.max = maxDay;
     deadLineValue.textContent = declOfNum(rangeDeadline.value, DATA.DAY_STRING);
+
+    checkboxLabel[0].textContent = inputs[3].checked ? 'Да' : 'Нет';
+    checkboxLabel[1].textContent = inputs[4].checked ? 'Да' : 'Нет';
+    checkboxLabel[2].textContent = inputs[5].checked ? 'Да' : 'Нет';
+    checkboxLabel[3].textContent = inputs[6].checked ? 'Да' : 'Нет';
 };
 
 const priceCulc = (elem) => {
@@ -80,6 +86,7 @@ const priceCulc = (elem) => {
             txtSite = item.dataset.site;
             maxDeadlineDay = DATA.deadlineDay[index][1];
             minDeadlineDay = DATA.deadlineDay[index][0];
+            
         } else if (item.classList.contains('calc-handler') && item.checked) {
             options.push(item.value);
         }
@@ -89,6 +96,7 @@ const priceCulc = (elem) => {
             inputs[5].disabled = 'false';
             inputs[5].checked = false;
         }
+        
     } 
 
     options.forEach((key) => {
@@ -109,7 +117,7 @@ const priceCulc = (elem) => {
 
     result += DATA.price[index];
 
-    renderTextConten(result, txtSite, maxDeadlineDay, minDeadlineDay, );
+    renderTextConten(result, txtSite, maxDeadlineDay, minDeadlineDay);
 
 };
 const handlerCallBackForm = (event) => {

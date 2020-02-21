@@ -102,7 +102,7 @@ const renderTextConten = (total, txtSite, maxDay, minDay) => {
         ${inputs[6].checked ? `Установим панель админстратора, 
         чтобы вы могли самостоятельно менять содержание на сайте без разработчика.` : ''}
         ${dopOptionsString()}
-        `;
+    `;
 };
 
 const priceCulc = (elem = {}) => {
@@ -163,9 +163,7 @@ const priceCulc = (elem = {}) => {
         } 
     });
 
-
-
-    result += result * overPercent;
+    result += Math.floor(result * overPercent);
 
     renderTextConten(result, txtSite, maxDeadlineDay, minDeadlineDay);
 };

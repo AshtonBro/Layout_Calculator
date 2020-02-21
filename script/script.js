@@ -17,7 +17,6 @@ const startButton = document.querySelector('.start-button'),
     checkboxLabel = document.querySelectorAll('.checkbox-label'),
     calcDescription = document.querySelector('.calc-description'),
     labelCheck = document.querySelectorAll('.label-check');
-    console.log('labelCheck: ', labelCheck);
 
 const DATA = {
     DAY_STRING: ['день', 'дня', 'дней'],
@@ -51,12 +50,27 @@ const hideElem = (elem) => {
     elem.style.display = 'none';
 };
 
-const dopPtionsString = () => {
+const dopOptionsString = () => {
 //Подключим Яндекс Метрику, Гугл Аналитику и отправку заявок на почту.
 
-let str = '';
+    let str = '';
 
-return str;
+    if(labelCheck[0].checked || labelCheck[1].checked || labelCheck[2].checked){
+        str += 'Подключим';
+        if (labelCheck[0].checked) {
+            str += 'Яндекс Метрику';
+            if (labelCheck[1].checked && labelCheck[2].checked) {
+                str += ', Гугл Аналитику и отправку заявок на почту.';
+                return;
+            }
+            if (labelCheck[1].checked || labelCheck[2].checked){
+                str += ' и';
+            }
+        }
+        if()
+    }
+
+    return str;
 };
 
 const renderTextConten = (total, txtSite, maxDay, minDay) => {
@@ -77,7 +91,7 @@ const renderTextConten = (total, txtSite, maxDay, minDay) => {
         ', адаптированный под мобильные устройства и планшеты' : ''}.
         ${inputs[6].checked ? `Установим панель админстратора, 
         чтобы вы могли самостоятельно менять содержание на сайте без разработчика.` : ''}
-        ${dopPtionsString()}
+        ${dopOptionsString()}
         `;
 };
 

@@ -16,7 +16,8 @@ const startButton = document.querySelector('.start-button'),
     deadLineValue = document.querySelector('.deadline-value'),
     checkboxLabel = document.querySelectorAll('.checkbox-label'),
     calcDescription = document.querySelector('.calc-description'),
-    labelCheck = document.querySelectorAll('.label-check');
+    labelCheck = document.querySelectorAll('.css-check'),
+    totalPrice = document.querySelector('.total_price');
 
 const DATA = {
     DAY_STRING: ['день', 'дня', 'дней'],
@@ -52,26 +53,31 @@ const hideElem = (elem) => {
 
 const dopOptionsString = () => {
 //Подключим Яндекс Метрику, Гугл Аналитику и отправку заявок на почту.
-
     let str = '';
-
+   
     if(labelCheck[0].checked || labelCheck[1].checked || labelCheck[2].checked){
         str += 'Подключим';
         if (labelCheck[0].checked) {
-            str += 'Яндекс Метрику';
+            str += ' Яндекс Метрику';
             if (labelCheck[1].checked && labelCheck[2].checked) {
                 str += ', Гугл Аналитику и отправку заявок на почту.';
-                return;
+                return str;
             }
-            if (labelCheck[1].checked || labelCheck[2].checked){
+            if (labelCheck[1].checked || labelCheck[2].checked) {
                 str += ' и';
             }
         }
-        if(labelCheck[1].checked){
+        if(labelCheck[1].checked) {
             str += ' Гугл Аналитику';
+            if (labelCheck[2].checked) {
+                str += ' и';
+            }
         }
+        if (labelCheck[2].checked) {
+            str += ' отправку заявок на почту';
+        }
+        str += '.';
     }
-
     return str;
 };
 
@@ -185,6 +191,10 @@ endButton.addEventListener('click', () => {
             hideElem(elem);
         }
     }
+
+    cardHead.textContent = 'Заявка на разработку сайта';
+
+    hideElem(totalPrice);
 
     showElem(total);
 });

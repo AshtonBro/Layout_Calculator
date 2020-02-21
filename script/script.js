@@ -17,7 +17,9 @@ const startButton = document.querySelector('.start-button'),
     checkboxLabel = document.querySelectorAll('.checkbox-label'),
     calcDescription = document.querySelector('.calc-description'),
     labelCheck = document.querySelectorAll('.css-check'),
-    totalPrice = document.querySelector('.total_price');
+    totalPrice = document.querySelector('.total_price'),
+    cardHead = document.querySelector('.card-head'),
+    firstFieldSet = document.querySelector('.first-fieldset');
 
 const DATA = {
     DAY_STRING: ['день', 'дня', 'дней'],
@@ -180,9 +182,28 @@ const handlerCallBackForm = (event) => {
     }
 };
 
+const moveBackTotal = () => {
+    if (document.documentElement.getBoundingClientRect().bottom > document.documentElement.clientHeight + 200) {
+        totalPrice.classList.remove('totalPriceBottom');
+        firstFieldSet.after(totalPrice);
+        window.removeEventListener('scroll', moveBackTotal);
+        window.addEventListener('scroll', moveTotal);
+    }
+};
+
+const moveTotal = () => {
+    if(document.documentElement.getBoundingClientRect().bottom < document.documentElement.clientHeight + 200){
+        totalPrice.classList.add('totalPriceBottom');
+        endButton.before(totalPrice);
+        window.removeEventListener('scroll', moveTotal);
+        window.addEventListener('scroll', moveBackTotal);
+    }
+};
+
 startButton.addEventListener('click', () => {
     showElem(mainForm);
     hideElem(firstScreen);
+    window.addEventListener('scroll', moveTotal);
 });
 
 endButton.addEventListener('click', () => {

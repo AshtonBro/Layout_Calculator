@@ -14,7 +14,10 @@ const startButton = document.querySelector('.start-button'),
     maxDedline = document.querySelector('.max-deadline'),
     rangeDeadline = document.querySelector('.range-deadline'),
     deadLineValue = document.querySelector('.deadline-value'),
-    checkboxLabel = document.querySelectorAll('.checkbox-label');
+    checkboxLabel = document.querySelectorAll('.checkbox-label'),
+    calcDescription = document.querySelector('.calc-description'),
+    labelCheck = document.querySelectorAll('.label-check');
+    console.log('labelCheck: ', labelCheck);
 
 const DATA = {
     DAY_STRING: ['день', 'дня', 'дней'],
@@ -48,6 +51,14 @@ const hideElem = (elem) => {
     elem.style.display = 'none';
 };
 
+const dopPtionsString = () => {
+//Подключим Яндекс Метрику, Гугл Аналитику и отправку заявок на почту.
+
+let str = '';
+
+return str;
+};
+
 const renderTextConten = (total, txtSite, maxDay, minDay) => {
     totalPriceSum.textContent = total;
     typeSite.textContent = txtSite;
@@ -60,15 +71,24 @@ const renderTextConten = (total, txtSite, maxDay, minDay) => {
     checkboxLabel[1].textContent = inputs[4].checked ? 'Да' : 'Нет';
     checkboxLabel[2].textContent = inputs[5].checked ? 'Да' : 'Нет';
     checkboxLabel[3].textContent = inputs[6].checked ? 'Да' : 'Нет';
+
+    calcDescription.textContent = `
+    Сделаем ${txtSite} ${inputs[4].checked ? 
+        ', адаптированный под мобильные устройства и планшеты' : ''}.
+        ${inputs[6].checked ? `Установим панель админстратора, 
+        чтобы вы могли самостоятельно менять содержание на сайте без разработчика.` : ''}
+        ${dopPtionsString()}
+        `;
 };
 
-const priceCulc = (elem) => {
+const priceCulc = (elem = {}) => {
     let result = 0,
         index = 0,
         options = [],
         txtSite = '',
         maxDeadlineDay = DATA.deadlineDay[index][1],
-        minDeadlineDay = DATA.deadlineDay[index][0];
+        minDeadlineDay = DATA.deadlineDay[index][0],
+        overPercent = 0;
 
     if (elem.name === 'whichSite') {
         for (const item of formCalculate.elements) {
@@ -88,6 +108,9 @@ const priceCulc = (elem) => {
             
         } else if (item.classList.contains('calc-handler') && item.checked) {
             options.push(item.value);
+        } else if (item.classList.contains('want-faster') && item.checked){
+            const overDay = maxDeadlineDay - rangeDeadline.value;
+            overPercent = overDay * (DATA.deadlinePercent[index] / 100);
         }
         if (item.value === 'adapt' && item.checked){
             inputs[5].removeAttribute("disabled");
@@ -97,6 +120,8 @@ const priceCulc = (elem) => {
         }
         
     } 
+
+    result += DATA.price[index];
 
     options.forEach((key) => {
         if (typeof(DATA[key]) === 'number') {
@@ -114,16 +139,19 @@ const priceCulc = (elem) => {
         } 
     });
 
-    result += DATA.price[index];
+
+
+    result += result * overPercent;
 
     renderTextConten(result, txtSite, maxDeadlineDay, minDeadlineDay);
-
 };
+
 const handlerCallBackForm = (event) => {
     const target = event.target;
 
     if (target.classList.contains('want-faster')) {
         target.checked ? showElem(fastRange) : hideElem(fastRange);
+        priceCulc(target);
     }
     if (target.classList.contains('calc-handler')) {
         priceCulc(target);
@@ -147,3 +175,5 @@ endButton.addEventListener('click', () => {
 
 
 formCalculate.addEventListener('change', handlerCallBackForm);
+
+priceCulc();

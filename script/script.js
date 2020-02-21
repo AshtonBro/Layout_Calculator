@@ -67,7 +67,9 @@ const dopOptionsString = () => {
                 str += ' и';
             }
         }
-        if()
+        if(labelCheck[1].checked){
+            str += ' Гугл Аналитику';
+        }
     }
 
     return str;

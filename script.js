@@ -198,10 +198,24 @@ const moveTotal = () => {
     }
 };
 
+const formSubmin = event => {
+    event.preventDefault();
+    console.log(event);
+
+    const data = new FormData(event.target);
+
+    fetch('server.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        body: data,
+    }).then(renderResponse).catch(error => console.log(error));
+};
+
 const renderResponse = response => {
     if (response.ok) {
         hideElem(total);
-        
         cardHead.textContent = 'Заявка на разработку сайта была отправлена!!! мы скоро с вами свяжемся';
     }
 };
@@ -229,20 +243,6 @@ endButton.addEventListener('click', () => {
 
 formCalculate.addEventListener('change', handlerCallBackForm);
 
-formCalculate.addEventListener('submit', event => {
-    event.preventDefault();
-
-    const data = new FormData(formCalculate);
-
-    fetch('server.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        },
-        body: data,
-    }).then(renderResponse).catch(error => console.log(error));
-
-
-});
+formCalculate.addEventListener('submit', formSubmin);
 
 priceCulc();

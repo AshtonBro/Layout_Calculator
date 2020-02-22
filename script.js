@@ -199,7 +199,11 @@ const moveTotal = () => {
 };
 
 const renderResponse = response => {
-
+    if (response.ok) {
+        hideElem(total);
+        
+        cardHead.textContent = 'Заявка на разработку сайта была отправлена!!! мы скоро с вами свяжемся';
+    }
 };
 
 startButton.addEventListener('click', () => {

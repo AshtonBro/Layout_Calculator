@@ -216,7 +216,7 @@ const formSubmin = event => {
 const renderResponse = response => {
     if (response.ok) {
         hideElem(total);
-        cardHead.textContent = 'Заявка на разработку сайта была отправлена!!! мы скоро с вами свяжемся';
+        cardHead.textContent = 'Заявка на разработку сайта была отправлена! Мы скоро с вами свяжемся';
     }
 };
 

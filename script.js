@@ -198,6 +198,10 @@ const moveTotal = () => {
     }
 };
 
+const renderResponse = response => {
+
+};
+
 startButton.addEventListener('click', () => {
     showElem(mainForm);
     hideElem(firstScreen);
@@ -220,5 +224,21 @@ endButton.addEventListener('click', () => {
 
 
 formCalculate.addEventListener('change', handlerCallBackForm);
+
+formCalculate.addEventListener('submit', event => {
+    event.preventDefault();
+
+    const data = new FormData(formCalculate);
+
+    fetch('server.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        body: data,
+    }).then(renderResponse).catch(error => console.log(error));
+
+
+});
 
 priceCulc();
